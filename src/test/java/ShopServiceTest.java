@@ -8,18 +8,19 @@ class ShopServiceTest {
 
     @Test
     void addOrderTest() {
-        //GIVEN
+        // GIVEN
         ShopService shopService = new ShopService();
         List<String> productsIds = List.of("1");
 
-        //WHEN
+        // WHEN
         Order actual = shopService.addOrder(productsIds);
 
-        //THEN
-        Order expected = new Order("-1", List.of(new Product("1", "Apfel")));
-        assertEquals(expected.products(), actual.products());
-        assertNotNull(expected.id());
+        // THEN
+        assertNotNull(actual.id()); // Stellen Sie sicher, dass eine ID generiert wurde
+        assertEquals(List.of(new Product("1", "Apfel")), actual.products());
+        assertEquals(OrderStatus.PROCESSING, actual.orderStatus());
     }
+
 
     @Test
     void addOrderTest_whenInvalidProductId_expectNull() {

@@ -30,4 +30,27 @@ public class OrderListRepo implements OrderRepo{
             }
         }
     }
+
+    @Override
+    public void updateOrderStatus(String orderId, OrderStatus newStatus) {
+        for (int i = 0; i < orders.size(); i++) {
+            Order order = orders.get(i);
+            if (order.id().equals(orderId)) {
+                orders.set(i, new Order(order.id(), order.products(), newStatus));
+                return;
+            }
+        }
+    }
+
+    @Override
+    public List<Order> getOrdersByStatus(OrderStatus status) {
+        List<Order> filteredOrders = new ArrayList<>();
+        for (Order order : orders) {
+            if (order.orderStatus() == status) {
+                filteredOrders.add(order);
+            }
+        }
+        return filteredOrders;
+    }
+
 }

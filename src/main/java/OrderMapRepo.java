@@ -26,4 +26,24 @@ public class OrderMapRepo implements OrderRepo{
     public void removeOrder(String id) {
         orders.remove(id);
     }
-}
+
+    @Override
+    public void updateOrderStatus(String orderId, OrderStatus newStatus) {
+        if (orders.containsKey(orderId)) {
+            Order existingOrder = orders.get(orderId);
+            orders.put(orderId, new Order(existingOrder.id(), existingOrder.products(), newStatus));
+        }
+    }
+
+    @Override
+    public List<Order> getOrdersByStatus(OrderStatus status) {
+        List<Order> filteredOrders = new ArrayList<>();
+        for (Order order : orders.values()) {
+            if (order.orderStatus() == status) {
+                filteredOrders.add(order);
+            }
+        }
+        return filteredOrders;
+    }
+    }
+
