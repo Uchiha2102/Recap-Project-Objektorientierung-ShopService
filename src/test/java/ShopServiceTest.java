@@ -16,7 +16,7 @@ class ShopServiceTest {
         Order actual = shopService.addOrder(productsIds);
 
         // THEN
-        assertNotNull(actual.id()); // Stellen Sie sicher, dass eine ID generiert wurde
+        assertNotNull(actual.id());
         assertEquals(List.of(new Product("1", "Apfel")), actual.products());
         assertEquals(OrderStatus.PROCESSING, actual.orderStatus());
     }
